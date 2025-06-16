@@ -14,9 +14,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.test_kotlin_todo_room_app.components.EditDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,10 +35,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainContent() {
-    val isShowDialog = remember { mutableStateOf(false) }
+fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
 
-    if (isShowDialog.value) {
+    if (viewModel.isShowDialog) {
         EditDialog()
     }
 
@@ -47,7 +45,7 @@ fun MainContent() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    isShowDialog.value = true
+                    viewModel.isShowDialog = true
                 }
             ) {
                 Icon(

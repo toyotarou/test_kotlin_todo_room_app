@@ -10,12 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.test_kotlin_todo_room_app.MainViewModel
 
 @Composable
 fun EditDialog(
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     AlertDialog(
-        onDismissRequest = {},
+        onDismissRequest = {
+            viewModel.isShowDialog = false
+        },
         title = {
             Text(
                 "新規作成"
@@ -26,14 +31,27 @@ fun EditDialog(
                 Text(
                     "タイトル"
                 )
-                TextField(value = "", onValueChange = {})
+                TextField(
+                    value = viewModel.title,
+                    onValueChange = {
+                        viewModel.title = it
+                    },
+                )
                 Text("詳細")
-                TextField(value = "", onValueChange = {})
+                TextField(
+                    value = viewModel.description,
+                    onValueChange = {
+                        viewModel.description = it
+                    },
+                )
             }
         },
         confirmButton = {
             Button(
                 onClick = {
+                    viewModel.createTask()
+
+                    viewModel.isShowDialog = false
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Blue
@@ -50,6 +68,7 @@ fun EditDialog(
         dismissButton = {
             Button(
                 onClick = {
+                    viewModel.isShowDialog = false
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Blue
