@@ -1,6 +1,7 @@
 package com.example.test_kotlin_todo_room_app
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.test_kotlin_todo_room_app.components.EditDialog
@@ -55,6 +58,10 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
             }
         }
     ) {
+
+        val tasks by viewModel.tasks.collectAsState(initial = emptyList())
+        Log.d("COUNT", tasks.size.toString())
+
         Column(
             modifier = Modifier
                 .padding(it)
