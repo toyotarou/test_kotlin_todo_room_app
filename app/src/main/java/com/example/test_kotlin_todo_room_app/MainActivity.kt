@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.test_kotlin_todo_room_app.components.EditDialog
+import com.example.test_kotlin_todo_room_app.components.TaskList
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,6 +67,16 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
             modifier = Modifier
                 .padding(it)
                 .fillMaxSize()
-        ) { }
+        ) {
+            TaskList(tasks = tasks,
+                onClickRow = {
+//                    viewModel.setEditingTask(it)
+                    viewModel.isShowDialog = true
+                },
+                onClickDelete = {
+//                    viewModel.deleteTask(it)
+                }
+            )
+        }
     }
 }
