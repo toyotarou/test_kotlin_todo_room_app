@@ -74,7 +74,7 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
                     viewModel.isShowDialog = true
                 },
                 onClickDelete = {
-//                    viewModel.deleteTask(it)
+                    viewModel.deleteTask(it)
                 }
             )
         }
