@@ -70,7 +70,7 @@ fun MainContent(viewModel: MainViewModel = hiltViewModel()) {
         ) {
             TaskList(tasks = tasks,
                 onClickRow = {
-//                    viewModel.setEditingTask(it)
+                    viewModel.setEditingTask(it)
                     viewModel.isShowDialog = true
                 },
                 onClickDelete = {

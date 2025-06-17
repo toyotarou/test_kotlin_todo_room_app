@@ -23,7 +23,8 @@ fun EditDialog(
         },
         title = {
             Text(
-                "新規作成"
+                if (viewModel.isEditing) "更新" else
+                    "新規作成"
             )
         },
         text = {
@@ -49,7 +50,8 @@ fun EditDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    viewModel.createTask()
+                    if (viewModel.isEditing) viewModel.updateTask() else
+                        viewModel.createTask()
 
                     viewModel.isShowDialog = false
                 },
