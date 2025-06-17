@@ -7,6 +7,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -17,6 +18,13 @@ import com.example.test_kotlin_todo_room_app.MainViewModel
 fun EditDialog(
     viewModel: MainViewModel = hiltViewModel()
 ) {
+
+    DisposableEffect(Unit) {
+        onDispose {
+            viewModel.resetProperties()
+        }
+    }
+
     AlertDialog(
         onDismissRequest = {
             viewModel.isShowDialog = false
